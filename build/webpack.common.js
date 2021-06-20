@@ -25,7 +25,7 @@ module.exports = {
         test: /\.svg$/,
         type: 'asset/inline'
       },
-      // 处理字体：导出一个资源的 data URI。之前通过使用 url-loader 实现
+      // 处理字体：直接引入字体 url，之前通过使用 file-loader 实现
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
         type: 'asset/resource',
