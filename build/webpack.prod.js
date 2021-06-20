@@ -21,14 +21,17 @@ module.exports = merge(webpackCommonConf, {
   module: {
     rules: [
       // 处理图片：考虑优化，之前通过使用 url-loader 实现
-      // 小于 8kb 的文件，将会视为 inline 模块类型，否则会被视为 resource 模块类型
+      // 小于 10kb 的文件，将会视为 inline 模块类型，否则会被视为 resource 模块类型
       {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 8 * 1024 // 8kb
+            maxSize: 10 * 1024 // 10kb
           }
+        },
+        generator: {
+          filename: 'img/[name].[hash:6][ext]'
         }
       },
       // 处理 CSS 和 LESS：考虑优化
@@ -54,7 +57,9 @@ module.exports = merge(webpackCommonConf, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: '[id].css',
-    })
+    }),
+    // 忽略 moment 下的 /locale 目录（在使用时，为了能显示语言，需要动态引入语言包）
+    new webpack.IgnorePlugin(/\.\/locale/, /moment/),
   ],
 
   optimization: {
