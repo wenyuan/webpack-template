@@ -20,10 +20,18 @@ module.exports = {
         use: ['babel-loader?cacheDirectory'],
         include: srcPath,
       },
-      // 处理字体和 SVG: 导出一个资源的 data URI。之前通过使用 url-loader 实现
+      // 处理 SVG：导出一个资源的 data URI。之前通过使用 url-loader 实现
+      {
+        test: /\.svg$/,
+        type: 'asset/inline'
+      },
+      // 处理字体：导出一个资源的 data URI。之前通过使用 url-loader 实现
       {
         test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-        type: 'asset/inline'
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/fonts/[name].[hash:6][ext]'
+        }
       }
     ],
   },
@@ -47,7 +55,7 @@ module.exports = {
     // 根据模板生成 HTML 文件
     new HtmlWebpackPlugin({
       title: 'Webpack Template',
-      favicon: path.join(srcPath, 'images', 'favicon.png'),
+      favicon: path.join(srcPath, 'images', 'favicon.ico'),
       template: path.join(srcPath, 'template.html'),
       filename: 'index.html'
     })

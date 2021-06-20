@@ -15,7 +15,7 @@ module.exports = merge(webpackCommonConf, {
 
   output: {
     path: distPath,
-    filename: 'js/[name].[contenthash:8].bundle.js',
+    filename: 'static/js/[name].[contenthash:8].bundle.js',
   },
 
   module: {
@@ -31,7 +31,7 @@ module.exports = merge(webpackCommonConf, {
           }
         },
         generator: {
-          filename: 'img/[name].[hash:6][ext]'
+          filename: 'static/img/[name].[hash:6][ext]'
         }
       },
       // 处理 CSS 和 LESS：考虑优化
@@ -55,7 +55,7 @@ module.exports = merge(webpackCommonConf, {
     }),
     // 抽离 CSS 到独立的文件
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:8].css',
+      filename: 'static/css/[name].[contenthash:8].css',
       chunkFilename: '[id].css',
     }),
     // 忽略 moment 下的 /locale 目录（在使用时，为了能显示语言，需要动态引入语言包）
