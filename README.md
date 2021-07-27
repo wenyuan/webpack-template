@@ -91,3 +91,11 @@ Babel 用于将 ES6+ 语法编写的代码转换为向后兼容的 JavaScript �
 [MIT](https://opensource.org/licenses/MIT)
 
 Copyright (c) 2021-present, WenYuan
+
+## 鸣谢
+
+本项目借鉴了 GitHub 上一个不错的项目，并根据实际需求做了一些调整。
+
+以下是我参考的仓库：
+
+* [webpack-boilerplate](https://github.com/taniarascia/webpack-boilerplate)
